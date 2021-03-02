@@ -12,7 +12,7 @@ version '1.0-SNAPSHOT'
 repositories {
 
     // solidity 编译器maven库
-    maven { url "https://dl.bintray.com/ethereum/maven/" }
+//    maven { url "https://dl.bintray.com/ethereum/maven/" }
     // JavaSDK snapshot 版本 maven库
     maven { url "https://oss.sonatype.org/content/repositories/snapshots"}
     // JavaSDK maven 库
@@ -20,14 +20,23 @@ repositories {
 
     mavenCentral()
 }
-
+def spring_version = "4.3.27.RELEASE"
+List spring = [
+        "org.springframework:spring-core:$spring_version",
+        "org.springframework:spring-beans:$spring_version",
+        "org.springframework:spring-context:$spring_version",
+        "org.springframework:spring-tx:$spring_version",
+]
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     // 日志依赖
-    compile ('org.slf4j:slf4j-log4j12:1.7.25')
+    //    compile ('org.slf4j:slf4j-log4j12:1.7.25')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
     // JavaSDK依赖, 2.1.0版本
-    compile ('org.fisco-bcos:web3sdk:2.1.0')
+    // compile ('org.fisco-bcos:web3sdk:2.1.0')
+    compile ('org.fisco-bcos.java-sdk:fisco-bcos-java-sdk:2.7.1')
+    compile spring
 }
 jar {
     manifest {
