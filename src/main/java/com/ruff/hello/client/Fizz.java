@@ -19,7 +19,6 @@ public class Fizz {
         AssetClient assetClient = new AssetClient(1,privateKey);
         assetClient.sayHello();
         assetClient.stop();
-
     }
 
     public static String convert(int fizzBuzz) {

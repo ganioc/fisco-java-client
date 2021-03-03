@@ -19,6 +19,7 @@ public class AssetClient {
                 new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         bcosSdk = context.getBean(BcosSDK.class);
         client = bcosSdk.getClient(groupId);
+
         // generate keys
         cryptoKeyPair =  client.getCryptoSuite().createKeyPair(privateKey);
         System.out.print("Private:");
@@ -36,5 +37,6 @@ public class AssetClient {
     }
     public  void stop(){
         client.stop();
+        bcosSdk.stopAll();
     }
 }
