@@ -93,6 +93,32 @@ public class AssetClient {
         }
     }
 
+    public int transferContractAsset(String contractAddress, String fromAccount, String toAccount, BigInteger amount){
+        try{
+            Asset asset = Asset.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = asset.transfer(fromAccount, toAccount, amount);
+            List<Asset.TransferEventEventResponse> response = asset.getTransferEventEvents(receipt);
+            if(!response.isEmpty()){
+                if(response.get(0).ret.compareTo(new BigInteger("0")) == 0){
+                    System.out.printf(
+                            " transfer success => from %s, to %s, amount: %s \n",
+                            fromAccount, toAccount,amount);
+                    return  0;
+                }else {
+                    System.out.printf(" transfer asset amount failed, ret code is %s \n",
+                            response.get(0).ret.toString());
+                    return 3;
+                }
+            }else{
+                System.out.printf( " transfer asset account failed, ret code is %s\n", response.get(0).ret.toString());
+                return 2;
+            }
+        }catch(Exception e){
+            System.out.println("Wrong operation");
+            return  1;
+        }
+    }
+
     public void sayHello() {
         System.out.println("Hello!");
     }

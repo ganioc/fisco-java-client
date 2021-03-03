@@ -1,5 +1,6 @@
 package com.ruff.hello.client;
 
+import com.ruff.hello.contract.Asset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +12,9 @@ public class Fizz {
 
     public static void main(String[] args) {
         logger.debug("Asset-app Contract");
-        logger.debug("-----------------------------------------" );
+        logger.debug("-----------------------------------------");
 
-        AssetClient assetClient = new AssetClient(1,privateKey);
+        AssetClient assetClient = new AssetClient(1, privateKey);
         assetClient.sayHello();
 
         // deploy contract
@@ -23,19 +24,29 @@ public class Fizz {
         // register to contract
 //        int rtn = assetClient.registerContractAsset(
 //                "0x5cce12408a11934742af4ad7bdabc452564be22f",
-//                "asset0",
+//                "asset1",
 //                new BigInteger(String.valueOf(1000)));
 //        logger.info("ret: %d", rtn);
 
         // query contract
         int rtn = assetClient.queryContractAsset(
                 "0x5cce12408a11934742af4ad7bdabc452564be22f",
-                "asset0"
+                "asset1"
         );
         logger.info("ret: {}", rtn);
 
+        // transfer
+//        int rtn = assetClient.transferContractAsset(
+//                "0x5cce12408a11934742af4ad7bdabc452564be22f",
+//                "asset0",
+//                "asset1",
+//                new BigInteger("100")
+//        );
+//        logger.info("ret: {}", rtn);
+
         assetClient.stop();
     }
+
 
     public static String convert(int fizzBuzz) {
         if (fizzBuzz % 15 == 0) {
