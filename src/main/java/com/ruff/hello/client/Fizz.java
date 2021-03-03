@@ -5,6 +5,9 @@ import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class Fizz {
     static Logger logger = LoggerFactory.getLogger(Fizz.class);
@@ -14,10 +17,22 @@ public class Fizz {
     private CryptoKeyPair cryptoKeyPair;
 
     public static void main(String[] args) {
+        logger.debug("Asset-app Contract");
+        logger.debug("-----------------------------------------" );
 
-        for (int i = 0; i < 5; i++) {
-            System.out.println(convert(i));
+        try{
+            AssetClient.sayHello();
+        }catch (Exception e){
+            logger.debug("Wrong Hello");
+            logger.debug(e.toString());
         }
+
+    }
+
+    public void fisInitialize() throws Exception{
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+                logger.debug("Initialize()");
     }
 
     public static String convert(int fizzBuzz) {

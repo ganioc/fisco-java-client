@@ -7,7 +7,7 @@ application {
     mainClassName = 'com.ruff.hello.Fizz'
 }
 group 'org.example'
-version '1.0-SNAPSHOT'
+version '1.1-SNAPSHOT'
 
 repositories {
 
@@ -37,15 +37,32 @@ dependencies {
     // compile ('org.fisco-bcos:web3sdk:2.1.0')
     compile ('org.fisco-bcos.java-sdk:fisco-bcos-java-sdk:2.7.1')
     compile spring
+    compile ('org.slf4j:slf4j-log4j12:1.7.25')
+    runtime ('org.slf4j:slf4j-log4j12:1.7.25')
 }
 jar {
+    destinationDir file('dist/apps')
+    archiveName project.name + project.version + '.jar'
+
     manifest {
         attributes "Main-Class": "com.ruff.hello.Fizz"
     }
-    from {
-        configurations.compile.collect {
-            it.isDirectory() ? it : zipTree(it)
+//    from {
+//        configurations.compile.collect {
+//            it.isDirectory() ? it : zipTree(it)
+//        }
+//    }
+
+    doLast {
+        copy {
+            from configurations.runtime
+            into 'dist/lib'
         }
+        copy {
+            from file('src/test/resources/')
+            into 'dist/conf'
+        }
+
     }
 }
 test {
