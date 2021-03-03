@@ -2,11 +2,8 @@ package com.ruff.hello.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.concurrent.TimeUnit;
-
+import java.math.BigInteger;
 
 public class Fizz {
     static Logger logger = LoggerFactory.getLogger(Fizz.class);
@@ -18,6 +15,19 @@ public class Fizz {
 
         AssetClient assetClient = new AssetClient(1,privateKey);
         assetClient.sayHello();
+
+        // deploy contract
+//        assetClient.deployContractAsset();
+//        assetClient.sleep(1);
+
+        // register to contract
+//        int rtn = assetClient.registerContractAsset(
+//                "0x5cce12408a11934742af4ad7bdabc452564be22f",
+//                "asset0",
+//                new BigInteger(String.valueOf(1000)));
+//        logger.info("ret: %d", rtn);
+
+
         assetClient.stop();
     }
 
