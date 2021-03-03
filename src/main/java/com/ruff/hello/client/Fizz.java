@@ -27,6 +27,12 @@ public class Fizz {
 //                new BigInteger(String.valueOf(1000)));
 //        logger.info("ret: %d", rtn);
 
+        // query contract
+        int rtn = assetClient.queryContractAsset(
+                "0x5cce12408a11934742af4ad7bdabc452564be22f",
+                "asset0"
+        );
+        logger.info("ret: {}", rtn);
 
         assetClient.stop();
     }
