@@ -1,38 +1,25 @@
 package com.ruff.hello.client;
 
-import org.fisco.bcos.sdk.BcosSDK;
-import org.fisco.bcos.sdk.client.Client;
-import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class Fizz {
     static Logger logger = LoggerFactory.getLogger(Fizz.class);
-
-    private BcosSDK bcosSDK;
-    private Client client;
-    private CryptoKeyPair cryptoKeyPair;
+    static String privateKey = "7a90e31dcd8e7b60dd89c9824cc96064c5e1538f94b7d7c1b3e5bf6a7a935cb8";
 
     public static void main(String[] args) {
         logger.debug("Asset-app Contract");
         logger.debug("-----------------------------------------" );
 
-        try{
-            AssetClient.sayHello();
-        }catch (Exception e){
-            logger.debug("Wrong Hello");
-            logger.debug(e.toString());
-        }
+        AssetClient assetClient = new AssetClient(1,privateKey);
+        assetClient.sayHello();
+        assetClient.stop();
 
-    }
-
-    public void fisInitialize() throws Exception{
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-                logger.debug("Initialize()");
     }
 
     public static String convert(int fizzBuzz) {
