@@ -3,6 +3,8 @@ package com.ruff.hello.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 public class Fizz {
     static Logger logger = LoggerFactory.getLogger(Fizz.class);
     static String privateKey = "7a90e31dcd8e7b60dd89c9824cc96064c5e1538f94b7d7c1b3e5bf6a7a935cb8";
@@ -10,12 +12,34 @@ public class Fizz {
     public static void main(String[] args) {
         logger.debug("POS Client Contract");
         logger.debug("-------------------------------------");
-        PosClient posClient = new PosClient(1, privateKey);
-        // deploy PIn contract
-        posClient.deployContractPosPay("shanghai");
-        Utils.sleep(1);
+//        PosClient posClient = new PosClient(1, privateKey);
+//        int ret = posClient.getIndex("0xc507387cb39eca8be927be84d927e040382546e3");
+//        System.out.println("Finished ");
+//        posClient.stop();
 
-        posClient.stop();
+
+//        PosClient posClient = new PosClient(1, privateKey);
+//        Utils.ErrCode rtn = posClient.InsertPosIn(
+//                "0xc507387cb39eca8be927be84d927e040382546e3",
+//                "1st_berth",
+//                new Date().toString(),
+//                0,
+//                1,
+//                "沪A00001",
+//                0,
+//                0,
+//                1,
+//                "0xfdsfdffff"
+//        );
+//        System.out.println("Finished ");
+//        posClient.stop();
+
+//        PosClient posClient = new PosClient(1, privateKey);
+//        // deploy PIn contract
+//        posClient.deployContractPosIn("shanghai");
+//        Utils.sleep(1);
+//
+//        posClient.stop();
 
 //        logger.debug("Asset-app Contract");
 //        logger.debug("-----------------------------------------");
