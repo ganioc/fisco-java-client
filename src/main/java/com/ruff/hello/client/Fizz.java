@@ -1,21 +1,27 @@
 package com.ruff.hello.client;
 
-import com.ruff.hello.contract.Asset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.math.BigInteger;
 
 public class Fizz {
     static Logger logger = LoggerFactory.getLogger(Fizz.class);
     static String privateKey = "7a90e31dcd8e7b60dd89c9824cc96064c5e1538f94b7d7c1b3e5bf6a7a935cb8";
 
     public static void main(String[] args) {
-        logger.debug("Asset-app Contract");
-        logger.debug("-----------------------------------------");
+        logger.debug("POS Client Contract");
+        logger.debug("-------------------------------------");
+        PosClient posClient = new PosClient(1, privateKey);
+        // deploy PIn contract
+        posClient.deployContractPosPay("shanghai");
+        Utils.sleep(1);
 
-        AssetClient assetClient = new AssetClient(1, privateKey);
-        assetClient.sayHello();
+        posClient.stop();
+
+//        logger.debug("Asset-app Contract");
+//        logger.debug("-----------------------------------------");
+//
+//        AssetClient assetClient = new AssetClient(1, privateKey);
+//        assetClient.sayHello();
 
         // deploy contract
 //        assetClient.deployContractAsset();
@@ -29,11 +35,11 @@ public class Fizz {
 //        logger.info("ret: %d", rtn);
 
         // query contract
-        int rtn = assetClient.queryContractAsset(
-                "0x5cce12408a11934742af4ad7bdabc452564be22f",
-                "asset1"
-        );
-        logger.info("ret: {}", rtn);
+//        int rtn = assetClient.queryContractAsset(
+//                "0x5cce12408a11934742af4ad7bdabc452564be22f",
+//                "asset1"
+//        );
+//        logger.info("ret: {}", rtn);
 
         // transfer
 //        int rtn = assetClient.transferContractAsset(
@@ -44,7 +50,7 @@ public class Fizz {
 //        );
 //        logger.info("ret: {}", rtn);
 
-        assetClient.stop();
+        //assetClient.stop();
     }
 
 
