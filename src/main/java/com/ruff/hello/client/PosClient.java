@@ -4,6 +4,8 @@ import com.ruff.hello.contract.TstIn;
 import com.ruff.hello.contract.TstOut;
 import com.ruff.hello.contract.TstPay;
 import org.fisco.bcos.sdk.BcosSDK;
+import org.fisco.bcos.sdk.abi.datatypes.Int;
+import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple9;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
@@ -94,21 +96,31 @@ public class PosClient {
         }
     }
 
-    public Utils.IfPosInRecord getByIdPosIn(String contractAddress, String berthId){
+    public PosInRecord getByIdPosIn(String contractAddress, String berthId){
 
         try{
             TstIn pIn = TstIn.load(contractAddress, client, cryptoKeyPair);
-            TransactionReceipt result = pIn.getById(berthId);
+            TransactionReceipt receipt = pIn.getById(berthId) ;
+            Tuple9<String, String, BigInteger, BigInteger, String, BigInteger, BigInteger, BigInteger, String> lst = pIn.getGetByIdOutput(receipt);
 
-            System.out.printf(" getByIdPosIn %s \n", result.getOutput());
-            Utils.IfPosInRecord record = new Utils.IfPosInRecord() {
-            };
+            PosInRecord record = new PosInRecord();
+            record.berthId = lst.getValue1();
+            record.inTime = lst.getValue2();
+            record.inTimeType = Integer.valueOf(lst.getValue3().toString());
+            record.inType = Integer.valueOf(lst.getValue4().toString());
+            record.plateId = lst.getValue5();
+            record.prepayLen = Integer.valueOf(lst.getValue6().toString());
+            record.prepayMoney = Integer.valueOf(lst.getValue7().toString());
+            record.vehicleType = Integer.valueOf(lst.getValue8().toString());
+            record.inPicHash = lst.getValue9();
+
+             System.out.printf(" getByIdPosIn %s , %s \n" , lst.getValue1(),lst.getValue2());
+
             return  record;
 
         }catch(Exception e){
             System.out.printf(" getByIdPosIn exception, error message is {} ", e.getMessage());
-            Utils.IfPosInRecord record = new Utils.IfPosInRecord() {
-            };
+            PosInRecord record = new PosInRecord();
             return  record;
         }
     }

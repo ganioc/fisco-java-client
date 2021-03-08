@@ -12,6 +12,18 @@ public class Fizz {
     public static void main(String[] args) {
         logger.debug("POS Client Contract");
         logger.debug("-------------------------------------");
+        PosClient posClient = new PosClient(1, privateKey);
+        PosInRecord ret = posClient.getByIdPosIn(
+                "0xc507387cb39eca8be927be84d927e040382546e3",
+                "1st_berth");
+        System.out.printf("%s\n", ret.toString());
+        System.out.println("Finished ");
+
+
+
+        posClient.stop();
+
+
 //        PosClient posClient = new PosClient(1, privateKey);
 //        int ret = posClient.getIndex("0xc507387cb39eca8be927be84d927e040382546e3");
 //        System.out.println("Finished ");
