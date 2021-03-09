@@ -13,14 +13,48 @@ public class Fizz {
         logger.debug("POS Client Contract");
         logger.debug("-------------------------------------");
         PosClient posClient = new PosClient(1, privateKey);
-        PosInRecord ret = posClient.getByIdPosIn(
-                "0xc507387cb39eca8be927be84d927e040382546e3",
-                "1st_berth");
+//        PosInRecord ret = posClient.getByIdPosIn(
+//                "0xc507387cb39eca8be927be84d927e040382546e3",
+//                "1st_berth");
+//        System.out.printf("%s\n", ret.toString());
+//        System.out.println("Finished ");
+
+//        posClient.deployContractPosOut("shanghai1");
+//        Utils.sleep(1);
+//        Utils.ErrCode rtn = posClient.InsertPosOut(
+//                "0xcaaa57ad37c2f22d630501dbcc9efa66a7b9b577",
+//                "1st_berth",
+//                new Date().toString(),
+//                0,
+//                "0001",
+//                "0xfdsfdffff"
+//        );
+//        System.out.println("Finished ");
+//        PosOutRecord ret = posClient.getByIdPosOut(
+//                "0xcaaa57ad37c2f22d630501dbcc9efa66a7b9b577",
+//                "1st_berth");
+//        System.out.printf("%s\n", ret.toString());
+//        System.out.println("Finished ");
+
+
+//        posClient.deployContractPosPay("shanghai2");
+//        Utils.sleep(1);
+//        Utils.ErrCode rtn = posClient.InsertPosPay(
+//                "0x8f9b76eb919a1a097485644d09155610a53ab4a6",
+//                "2nd_berth",
+//                10000,
+//                1,
+//                2000,
+//                "aaaaaa",
+//                0,
+//                10,
+//                1
+//        );
+        PosPayRecord ret = posClient.getByIdPosPay(
+                "0x8f9b76eb919a1a097485644d09155610a53ab4a6",
+                "2nd_berth");
         System.out.printf("%s\n", ret.toString());
         System.out.println("Finished ");
-
-
-
         posClient.stop();
 
 

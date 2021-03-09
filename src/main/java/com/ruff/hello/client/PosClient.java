@@ -5,6 +5,8 @@ import com.ruff.hello.contract.TstOut;
 import com.ruff.hello.contract.TstPay;
 import org.fisco.bcos.sdk.BcosSDK;
 import org.fisco.bcos.sdk.abi.datatypes.Int;
+import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple5;
+import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple8;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple9;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
@@ -83,9 +85,9 @@ public class PosClient {
         }
     }
 
-    public int getIndex(String contractAddr){
+    public int getIndex(String contractAddress){
         try{
-            TstIn tstIn = TstIn.load(contractAddr, client, cryptoKeyPair);
+            TstIn tstIn = TstIn.load(contractAddress, client, cryptoKeyPair);
             BigInteger rtn = tstIn.getIndex();
             System.out.printf(" getIndex %s \n", rtn.toString());
             return Integer.valueOf(rtn.toString());
@@ -135,6 +137,58 @@ public class PosClient {
             return ErrCode.FAIL;
         }
     }
+    public ErrCode InsertPosOut(String contractAddress,String berthId, String outTime, int shouldPayMoney, String id, String outPicHash){
+        try{
+            TstOut pOut = TstOut.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = pOut.insertRecord(
+                    berthId,
+                    outTime,
+                    BigInteger.valueOf(shouldPayMoney),
+                    id,
+                    outPicHash
+            );
+            List<TstOut.InsertRecordEventEventResponse> response = pOut.getInsertRecordEventEvents(receipt);
+            if(!response.isEmpty()){
+                if(response.get(0).ret.compareTo(new BigInteger("0")) == 0){
+                    System.out.printf(" insert record success from %s \n", response.get(0).account);
+                    return ErrCode.OK;
+                }else{
+                    System.out.printf(" insert record failed from %s \n", response.get(0).account);
+                    return ErrCode.OPERATION_FAIL;
+                }
+            }else{
+                System.out.println(" event log not found, maybe transaction not exec.");
+                return ErrCode.FAIL;
+            }
+        }catch (Exception e){
+            System.out.println("insert record PosIn failed!");
+            return ErrCode.FAIL;
+        }
+    }
+    public PosOutRecord getByIdPosOut(String contractAddress, String berthId){
+        try{
+            TstOut  pOut = TstOut.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = pOut.getById(berthId) ;
+            Tuple5<String, String, BigInteger, String, String> lst = pOut.getGetByIdOutput(receipt);
+
+            PosOutRecord record = new PosOutRecord();
+            record.berthId = lst.getValue1();
+            record.outTime = lst.getValue2();
+            record.shouldPayMoney = Integer.valueOf(lst.getValue3().toString());
+            record.id = lst.getValue4();
+            record.outPicHash = lst.getValue5();
+
+            System.out.printf(" getByIdPosOut %s , %s \n" , lst.getValue1(),lst.getValue2());
+
+            return  record;
+
+        }catch(Exception e){
+            System.out.printf(" getByIdPosOut exception, error message is {} ", e.getMessage());
+            return  new PosOutRecord();
+        }
+    }
+
+
     // For PosPay contract
     public ErrCode deployContractPosPay(String loc){
         try{
@@ -143,6 +197,65 @@ public class PosClient {
             return ErrCode.OK;
         }catch(Exception e){
             return ErrCode.FAIL;
+        }
+    }
+
+    public ErrCode InsertPosPay(String contractAddress,String berthId, int amount, int mode, int parkingActualPayMoney, String parkingRecordId, int prepayLen, int shouldPayAmount, int zeroOwe){
+        try{
+            TstPay pIn = TstPay.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = pIn.insertRecord(
+                    berthId,
+                    BigInteger.valueOf(amount),
+                    BigInteger.valueOf(mode),
+                    BigInteger.valueOf(parkingActualPayMoney),
+                    parkingRecordId,
+                    BigInteger.valueOf(prepayLen),
+                    BigInteger.valueOf(shouldPayAmount),
+                    BigInteger.valueOf(zeroOwe)
+            );
+            List<TstPay.InsertRecordEventEventResponse> response = pIn.getInsertRecordEventEvents(receipt);
+            if(!response.isEmpty()){
+                if(response.get(0).ret.compareTo(new BigInteger("0")) == 0){
+                    System.out.printf(" insert record success from %s \n", response.get(0).account);
+                    return ErrCode.OK;
+                }else{
+                    System.out.printf(" insert record failed from %s \n", response.get(0).account);
+                    return ErrCode.OPERATION_FAIL;
+                }
+            }else{
+                System.out.println(" event log not found, maybe transaction not exec.");
+                return ErrCode.FAIL;
+            }
+        }catch (Exception e){
+            System.out.println("insert record PosIn failed!");
+            return ErrCode.FAIL;
+        }
+    }
+    public PosPayRecord getByIdPosPay(String contractAddress, String berthId){
+
+        try{
+            TstPay pIn = TstPay.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = pIn.getById(berthId) ;
+            Tuple8<String, BigInteger, BigInteger, BigInteger, String, BigInteger, BigInteger, BigInteger> lst = pIn.getGetByIdOutput(receipt);
+
+            PosPayRecord record = new PosPayRecord();
+            record.berthId = lst.getValue1();
+            record.amount = Integer.valueOf(lst.getValue2().toString());
+            record.mode = Integer.valueOf(lst.getValue3().toString());
+            record.parkingActualPayMoney = Integer.valueOf(lst.getValue4().toString());
+            record.parkingRecordId = lst.getValue5();
+            record.prepayLen = Integer.valueOf(lst.getValue6().toString());
+            record.shouldPayAmount = Integer.valueOf(lst.getValue7().toString());
+            record.zeroOwe = Integer.valueOf(lst.getValue8().toString());
+
+            System.out.printf(" getByIdPosPay %s , %s \n" , lst.getValue1(),lst.getValue2());
+
+            return  record;
+
+        }catch(Exception e){
+            System.out.printf(" getByIdPosIn exception, error message is {} ", e.getMessage());
+            PosPayRecord record = new PosPayRecord();
+            return  record;
         }
     }
     public void stop() {
