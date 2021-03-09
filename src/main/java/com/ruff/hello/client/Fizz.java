@@ -50,12 +50,12 @@ public class Fizz {
 //                10,
 //                1
 //        );
-        PosPayRecord ret = posClient.getByIdPosPay(
-                "0x8f9b76eb919a1a097485644d09155610a53ab4a6",
-                "2nd_berth");
-        System.out.printf("%s\n", ret.toString());
-        System.out.println("Finished ");
-        posClient.stop();
+//        PosPayRecord ret = posClient.getByIdPosPay(
+//                "0x8f9b76eb919a1a097485644d09155610a53ab4a6",
+//                "2nd_berth");
+//        System.out.printf("%s\n", ret.toString());
+//        System.out.println("Finished ");
+//        posClient.stop();
 
 
 //        PosClient posClient = new PosClient(1, privateKey);
@@ -82,10 +82,10 @@ public class Fizz {
 
 //        PosClient posClient = new PosClient(1, privateKey);
 //        // deploy PIn contract
-//        posClient.deployContractPosIn("shanghai");
-//        Utils.sleep(1);
-//
-//        posClient.stop();
+        posClient.deployContractPosIn("shanghai");
+        Utils.sleep(1);
+
+        posClient.stop();
 
 //        logger.debug("Asset-app Contract");
 //        logger.debug("-----------------------------------------");
