@@ -32,6 +32,7 @@ public class POutInsertTest {
                 "0xfdsfdffff" + rand2
         );
         System.out.println("---------------");
+        System.out.println("berthId: " + "berth_" + rand1);
         System.out.println("POut Return code is: " + rtn);
         posClient.stop();
         Assertions.assertEquals(ErrCode.OK, rtn);
