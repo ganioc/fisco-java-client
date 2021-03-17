@@ -12,6 +12,8 @@ public class POutDeployTest {
     @Test
     public void Deploy() {
         System.out.println("Deploy PosOut contract");
+
+        /*
         PosClient posClient = new PosClient(1, privateKey);
 
         DeployRtn rtn = posClient.deployContractPosOut("Henan");
@@ -21,6 +23,9 @@ public class POutDeployTest {
         System.out.println("contract address: " +  rtn.contractAddress);
         posClient.stop();
         Assertions.assertEquals(Utils.ErrCode.OK, rtn.errCode);
+
+
+         */
     }
 
 

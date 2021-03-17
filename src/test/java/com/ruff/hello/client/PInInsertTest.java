@@ -30,7 +30,7 @@ public class PInInsertTest {
                 new Date().toString(),
                 0,
                 1,
-                "沪A00001" + rand2,
+                "A00001" + rand2,
                 0,
                 0,
                 1,

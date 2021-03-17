@@ -11,6 +11,8 @@ public class PInDeployTest {
     @Test
     public void Deploy() {
         System.out.println("Deploy PosIn contract");
+
+                /*
         PosClient posClient = new PosClient(1, privateKey);
 
         DeployRtn rtn = posClient.deployContractPosIn("Guilin");
@@ -20,6 +22,8 @@ public class PInDeployTest {
         System.out.println("contract address: " +  rtn.contractAddress);
         posClient.stop();
         Assertions.assertEquals(Utils.ErrCode.OK, rtn.errCode);
+        */
+
     }
 
 }
