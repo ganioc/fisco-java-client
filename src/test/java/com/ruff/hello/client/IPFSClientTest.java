@@ -13,10 +13,6 @@ public class IPFSClientTest {
     @Test
     public void Ipfs(){
         System.out.println("Test IPFS network:");
-//        IPFS ipfs = new IPFS("/ip4/192.168.0.112/tcp/5001");
-//
-//
-//        Multihash filePointer = Multihash.fromBase58("QmXksBoSt2LagL4UkedPrEL7hx89YsoNwLXhyXejsMSGWf");
 
         IPFSClient client = new IPFSClient("192.168.0.112", "5001");
 
@@ -32,5 +28,8 @@ public class IPFSClientTest {
         Assertions.assertEquals(1,1);
 
     }
+    @Test
+    public  void pushFile(){
 
+    }
 }

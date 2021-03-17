@@ -2,6 +2,7 @@ package com.ruff.hello.client;
 
 import io.ipfs.api.IPFS;
 import io.ipfs.multihash.Multihash;
+import com.ruff.hello.client.Utils.ErrCode;
 
 public class IPFSClient {
 
@@ -22,5 +23,7 @@ public class IPFSClient {
             return out;
         }
     }
+
+
 
 }
