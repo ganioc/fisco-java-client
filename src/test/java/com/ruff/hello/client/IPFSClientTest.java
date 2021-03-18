@@ -1,12 +1,8 @@
 package com.ruff.hello.client;
 
-import io.ipfs.api.MerkleNode;
-import io.ipfs.api.NamedStreamable;
-import io.ipfs.multihash.Multihash;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import  io.ipfs.api.IPFS;
 
 import java.nio.charset.StandardCharsets;
 
@@ -35,13 +31,10 @@ public class IPFSClientTest {
         System.out.println("Test IPFS network push :");
 
         IPFSClient client = new IPFSClient("192.168.0.112", "5001");
-        //IPFS ipfs = new IPFS("/ip4/192.168.0.112/tcp/5001");
-
-//        NamedStreamable.ByteArrayWrapper file = new NamedStreamable.ByteArrayWrapper("hello.txt", "G'day world! IPFS rocks! yang jun.".getBytes());
 
         try{
-            // List<MerkleNode> lst = ipfs.add(file);
-            String hash = client.pushFile("a.txt","Hello world, everybody!".getBytes(StandardCharsets.UTF_8));
+            String hash = client.pushFile(
+                    "a.txt","Hello world, everybody! Let's do it now.".getBytes(StandardCharsets.UTF_8));
             System.out.println("fb:" + hash);
 
         }catch (Exception e){
