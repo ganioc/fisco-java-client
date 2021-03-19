@@ -4,7 +4,6 @@ import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
 import io.ipfs.multihash.Multihash;
-import com.ruff.hello.client.Utils.ErrCode;
 
 import java.io.File;
 
