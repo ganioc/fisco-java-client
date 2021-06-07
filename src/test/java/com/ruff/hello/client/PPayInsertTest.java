@@ -10,8 +10,8 @@ import com.ruff.hello.client.Utils.ErrCode;
 
 public class PPayInsertTest {
     static String privateKey =
-            "7a90e31dcd8e7b60dd89c9824cc96064c5e1538f94b7d7c1b3e5bf6a7a935cb8";
-    static String contractAddress = "0xd5c50c996d6f75aef94fc00dbce9d12295927edc";
+            "cdc7cc95755f19aa8168e2b0c3dd89d556be87b60608835549c0aee38d156640";
+    static String contractAddress = "0x3d215cd9553b033b35af84dd38951cc8562908c5";
 
     @Test
     public void InsertRandomId() {

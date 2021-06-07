@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class PInTest {
-    static String privateKey = "7a90e31dcd8e7b60dd89c9824cc96064c5e1538f94b7d7c1b3e5bf6a7a935cb8";
-    static String contractAddress = "0x33368951f3ac3581a612c6bce20e405d094257bd";
+    static String privateKey = "cdc7cc95755f19aa8168e2b0c3dd89d556be87b60608835549c0aee38d156640";
+    static String contractAddress = "0xc65d19deffc4c4ac83afafe479434e3306a4cfeb";
 
     @Test
     public void query(){
@@ -19,11 +19,11 @@ public class PInTest {
 
         PosInRecord ret = posClient.getByIdPosIn(
                 contractAddress,
-                "berth_203");
+                "berth_719");
         System.out.printf("%s\n", ret.toString());
 
         posClient.stop();
-        Assertions.assertEquals("berth_203", ret.berthId);
+        Assertions.assertEquals("berth_719", ret.berthId);
     }
 
 }

@@ -41,6 +41,10 @@ public class PosClient {
         client.getCryptoSuite().setCryptoKeyPair(cryptoKeyPair);
     }
 
+    public Client getClient(){
+        return client;
+    }
+
     // For PosIn contract
     public DeployRtn deployContractPosIn(String loc) {
         try {
