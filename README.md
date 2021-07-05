@@ -1,5 +1,16 @@
 ## 链操作模块Java API-v0.3
-For integration with Android application.
+For integration with Java application.
+
+```shell
+test/resources/conf/ 目录下包含了节点通讯的证书和密钥
+test/resources/applicationContest.xml 链节点的ip/port设置
+
+main/java/**/contract/ 目录下包含了solidity编译生成的java API文件 TstInV3等
+
+# getIndex(), getByIndex()示例代码
+test/java/**/PInTest.java, POutTest.java, PPayTest.java
+
+```
 
 ## Versions
 ```
