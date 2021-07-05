@@ -4,6 +4,9 @@ For integration with Android application.
 ## Versions
 ```
 1.4.0 Add IPFS support
+
+branch developv3, use new Contracts
+
 ```
 ## API
 ### 3rd party libraries
