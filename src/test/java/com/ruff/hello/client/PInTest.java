@@ -26,9 +26,9 @@ public class PInTest {
         Assertions.assertEquals("berth_700", ret.berthId);
 
         PosInRecord ret2 = posClient.getByIndexPosIn(contractAddress, 1);
-        System.out.printf("%s\n", ret.toString());
+        System.out.printf("%s\n", ret2.toString());
 
-        Assertions.assertEquals("berth_700", ret.berthId);
+        Assertions.assertEquals("berth_700", ret2.berthId);
 
         posClient.stop();
     }
