@@ -7,11 +7,11 @@ application {
     mainClassName = 'com.ruff.hello.client'
 }
 group 'org.example'
-version '1.4.0-SNAPSHOT'
+version '1.6.1-SNAPSHOT'
 
 java{
     toolchain{
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion.set(JavaLanguageVersion.of(8))
     }
 }
 
@@ -59,6 +59,8 @@ dependencies {
 jar {
     destinationDir file('dist/apps')
     archiveName project.name + project.version + '.jar'
+//
+//    sourceCompatibility = 1.11
 
     manifest {
         attributes "Main-Class": "com.ruff.hello.client"

@@ -11,7 +11,9 @@ import com.ruff.hello.client.Utils.ErrCode;
 public class POutInsertTest {
     static String privateKey =
             "cdc7cc95755f19aa8168e2b0c3dd89d556be87b60608835549c0aee38d156640";
-    static String contractAddress = "0x0e8a2865c26445d3aa32b1d77d99cc01e190858b";
+    static String contractAddress = "0x239a0bdf1be615e3a0070ac19aed715a5b38eb61";
+    //""0xed4ca2376b2e156116087fb036b73f11c7d49227";
+    // "0x0e8a2865c26445d3aa32b1d77d99cc01e190858b";
 
     @Test
     public void InsertRandomId() {
@@ -26,7 +28,7 @@ public class POutInsertTest {
         ErrCode rtn = posClient.InsertPosOut(
                 contractAddress,
                 "berth_" + rand1,
-                new Date().toString(),
+                String.valueOf(new Date().getTime()) ,
                 0,
                 "0001",
                 "0xfdsfdffff" + rand2
