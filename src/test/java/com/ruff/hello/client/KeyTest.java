@@ -47,7 +47,8 @@ public class KeyTest {
 
         System.out.println("date:" + String.valueOf(new Date().getTime()) );
 
-
+        long timeNumber = new Date().getTime();
+        System.out.println("timeNumber:" + timeNumber);
 
 
         Assertions.assertEquals(1,1);

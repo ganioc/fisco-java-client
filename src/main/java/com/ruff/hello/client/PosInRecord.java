@@ -2,7 +2,7 @@ package com.ruff.hello.client;
 
 public class PosInRecord {
     public String berthId;
-    public String inTime;
+    public long inTime;
     public int inTimeType;
     public int inType;
     public String plateId;

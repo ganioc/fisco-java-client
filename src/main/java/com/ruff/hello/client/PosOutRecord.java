@@ -2,7 +2,7 @@ package com.ruff.hello.client;
 
 public class PosOutRecord {
     String berthId;
-    String outTime;
+    long outTime;
     int shouldPayMoney;
     String id;
     String outPicHash;

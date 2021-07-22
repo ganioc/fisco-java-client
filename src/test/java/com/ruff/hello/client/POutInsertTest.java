@@ -28,7 +28,7 @@ public class POutInsertTest {
         ErrCode rtn = posClient.InsertPosOut(
                 contractAddress,
                 "berth_" + rand1,
-                String.valueOf(new Date().getTime()) ,
+                (int)new Date().getTime() ,
                 0,
                 "0001",
                 "0xfdsfdffff" + rand2
