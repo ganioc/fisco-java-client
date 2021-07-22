@@ -235,7 +235,7 @@ public class PosClient {
 
             PosOutRecord record = new PosOutRecord();
             record.berthId = lst.getValue1();
-            record.outTime = Integer.valueOf(lst.getValue2().toString());
+            record.outTime = Long.valueOf(lst.getValue2().toString());
             record.shouldPayMoney = Integer.valueOf(lst.getValue3().toString());
             record.id = lst.getValue4();
             record.outPicHash = lst.getValue5();
@@ -257,7 +257,7 @@ public class PosClient {
 
             PosOutRecord record = new PosOutRecord();
             record.berthId = lst.getValue1();
-            record.outTime = Integer.valueOf(lst.getValue2().toString());
+            record.outTime = Long.valueOf(lst.getValue2().toString());
             record.shouldPayMoney = Integer.valueOf(lst.getValue3().toString());
             record.id = lst.getValue4();
             record.outPicHash = lst.getValue5();
