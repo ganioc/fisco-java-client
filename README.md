@@ -1,6 +1,8 @@
 ## 链操作模块Java API-v0.3
 For integration with Java application.
 
+
+
 ```shell
 test/resources/conf/ 目录下包含了节点通讯的证书和密钥
 test/resources/applicationContest.xml 链节点的ip/port设置
@@ -17,6 +19,9 @@ test/java/**/PInTest.java, POutTest.java, PPayTest.java
 1.4.0 Add IPFS support
 
 branch developv3, use new Contracts
+
+v5版本: 2021-07-20
+增加TstInV5 getRecord(), 返回多条入站记录;
 
 ```
 ## API

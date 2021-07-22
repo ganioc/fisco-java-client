@@ -4,6 +4,8 @@ import com.ruff.hello.contract.TstInV5;
 import com.ruff.hello.contract.TstOutV5;
 import com.ruff.hello.contract.TstPayV5;
 import org.fisco.bcos.sdk.BcosSDK;
+import org.fisco.bcos.sdk.abi.datatypes.Int;
+import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple4;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple5;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple8;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple9;
@@ -115,7 +117,7 @@ public class PosClient {
 
             PosInRecord record = new PosInRecord();
             record.berthId = lst.getValue1();
-            record.inTime = Integer.valueOf(lst.getValue2().toString());
+            record.inTime = Long.valueOf(lst.getValue2().toString());
             record.inTimeType = Integer.valueOf(lst.getValue3().toString());
             record.inType = Integer.valueOf(lst.getValue4().toString());
             record.plateId = lst.getValue5();
@@ -142,7 +144,7 @@ public class PosClient {
 
             PosInRecord record = new PosInRecord();
             record.berthId = lst.getValue1();
-            record.inTime = Integer.valueOf(lst.getValue2().toString());
+            record.inTime = Long.valueOf(lst.getValue2().toString());
             record.inTimeType = Integer.valueOf(lst.getValue3().toString());
             record.inType = Integer.valueOf(lst.getValue4().toString());
             record.plateId = lst.getValue5();
@@ -159,6 +161,29 @@ public class PosClient {
             System.out.printf(" getByIdPosIn exception, error message is {} ", e.getMessage());
             PosInRecord record = new PosInRecord();
             return record;
+        }
+    }
+    public boolean getRecordPosIn(String contractAddress, int page_offset, int page_size, long start , long end){
+        try{
+            TstInV5 pIn = TstInV5.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = pIn.getRecord(BigInteger.valueOf(page_offset),BigInteger.valueOf(page_size), BigInteger.valueOf(start), BigInteger.valueOf(end));
+
+            Tuple4<BigInteger, BigInteger, BigInteger, List<String>> lst  = pIn.getGetRecordOutput(receipt);
+
+            int offset = Integer.valueOf(lst.getValue1().toString());
+            int size = Integer.valueOf(lst.getValue2().toString());
+            int total = Integer.valueOf(lst.getValue3().toString());
+            List<String> content = lst.getValue4();
+            System.out.printf("offset %s, size %s, total %s\n",offset, size, total);
+            System.out.printf("Received %s records\n",content.size()/9);
+            System.out.println(content);
+            for(int i =0; i< content.size()/9; i++){
+                System.out.printf("%s %s %s %s %s %s %s %s %s\n", content.get(i*9 + 0),content.get(i*9 +1), content.get(i*9+2), content.get(i*9+3), content.get(i*9 +4),content.get(i*9 +5),content.get(i*9 +6),content.get(i*9 +7),content.get(i*9 +8));
+            }
+            return true;
+        }catch (Exception e){
+            System.out.printf("getRecordPosIn error }", e.getMessage());
+            return false;
         }
     }
 
