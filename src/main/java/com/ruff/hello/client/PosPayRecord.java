@@ -1,15 +1,15 @@
 package com.ruff.hello.client;
 
 public class PosPayRecord {
-    String berthId;
-    int amount;
-    int mode;
-    int parkingActualPayMoney;
-    String parkingRecordId;
-    int prepayLen;
-    int shouldPayAmount;
-    int zeroOwe;
-    public String toString(){
+    public String berthId;
+    public int amount;
+    public int mode;
+    public int parkingActualPayMoney;
+    public String parkingRecordId;
+    public int prepayLen;
+    public int shouldPayAmount;
+    public int zeroOwe;
+    public public String toString(){
         return  this.berthId + " "
                 + String.valueOf(this.amount) + " "
                 + String.valueOf(this.mode) + " "

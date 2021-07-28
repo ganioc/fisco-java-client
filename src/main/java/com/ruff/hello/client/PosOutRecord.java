@@ -1,11 +1,11 @@
 package com.ruff.hello.client;
 
 public class PosOutRecord {
-    String berthId;
-    long outTime;
-    int shouldPayMoney;
-    String id;
-    String outPicHash;
+    public String berthId;
+    public long outTime;
+    public int shouldPayMoney;
+    public String id;
+    public String outPicHash;
 
     public  String toString(){
         return this.berthId + " "

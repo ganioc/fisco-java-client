@@ -33,7 +33,7 @@ public class PInTest {
         Assertions.assertEquals("berth_7930", ret2.berthId);
 
         // test getRecord
-        posClient.getRecordPosIn(contractAddress, 0 , 10,1626940662676L, 1626941674067L);
+        posClient.getRecordPosIn(contractAddress, 0 , 10,1225616000000L, 1927487974067L);
 
         posClient.stop();
     }
