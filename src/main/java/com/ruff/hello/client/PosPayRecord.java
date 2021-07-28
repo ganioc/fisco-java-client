@@ -9,7 +9,7 @@ public class PosPayRecord {
     public int prepayLen;
     public int shouldPayAmount;
     public int zeroOwe;
-    public public String toString(){
+    public String toString(){
         return  this.berthId + " "
                 + String.valueOf(this.amount) + " "
                 + String.valueOf(this.mode) + " "
