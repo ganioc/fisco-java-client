@@ -20,7 +20,7 @@ test/java/**/PInTest.java, POutTest.java, PPayTest.java
 
 branch developv3, use new Contracts
 
-v5版本: 2021-07-20
+V6版本: 2021-07-20
 增加TstInV5 getRecord(), 返回多条入站记录;
 
 ```

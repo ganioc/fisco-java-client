@@ -11,7 +11,7 @@ import com.ruff.hello.client.Utils.ErrCode;
 public class PInInsertTest {
     static String privateKey =
             "cdc7cc95755f19aa8168e2b0c3dd89d556be87b60608835549c0aee38d156640";
-    static String contractAddress = "0x726c32800e75e23af0c668d5a645f5ce5ed83ce8";
+    static String contractAddress = "0x7c567f388fbe437e5707b3556ec911d0230b9d01";
     // "0x2659da137e9496001c5b196ac4d934356a35346f";
     // ""0xc425800568b24eca378563db315436c4c9a6bd6b";
     //"0x01d3ddd5e013afd5b7b92638af5193fef4e78939";
@@ -34,7 +34,7 @@ public class PInInsertTest {
                 new Date().getTime() ,
                 0,
                 1,
-                "A00001" + rand2,
+                "A00001" +rand2,
                 0,
                 0,
                 1,
