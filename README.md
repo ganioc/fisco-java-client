@@ -23,6 +23,9 @@ branch developv3, use new Contracts
 V6版本: 2021-07-20
 增加TstInV5 getRecord(), 返回多条入站记录;
 
+添加PosCmd, as interface in command line terminal.
+
+
 ```
 ## API
 ### 3rd party libraries
