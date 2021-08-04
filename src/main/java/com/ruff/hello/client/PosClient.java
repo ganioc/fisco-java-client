@@ -4,7 +4,6 @@ import com.ruff.hello.contract.TstInV6;
 import com.ruff.hello.contract.TstOutV6;
 import com.ruff.hello.contract.TstPayV6;
 import org.fisco.bcos.sdk.BcosSDK;
-import org.fisco.bcos.sdk.abi.datatypes.Int;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple4;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple5;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple8;
