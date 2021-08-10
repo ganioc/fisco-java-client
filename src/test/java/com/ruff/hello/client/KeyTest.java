@@ -34,8 +34,11 @@ public class KeyTest {
         PosClient posClient = new PosClient(1, privateKey);
         CryptoSuite cryptoSuite = posClient.getClient().getCryptoSuite();
 
+        // 0x0a3ab88829f7221ee9755eceb5d47a8ed614427d
+        // 0x6a16584ef4ec45b1bbecfdb8bb4fa09b6e85f09f.pem
+        // 0x60079bb72b53e55fd411d93cfa32e7fca0cd28a4.pem
         cryptoSuite.loadAccount("pem",
-                "src/test/resources/0x0a3ab88829f7221ee9755eceb5d47a8ed614427d.pem",
+                "src/test/resources/0x60079bb72b53e55fd411d93cfa32e7fca0cd28a4.pem",
                 null);
         CryptoKeyPair cryptoKeyPair = cryptoSuite.getCryptoKeyPair();
         System.out.print("Private:");

@@ -7,7 +7,7 @@ application {
     mainClassName = 'com.ruff.hello.client'
 }
 group 'org.example'
-version '1.6.1-SNAPSHOT'
+version '1.7.1-SNAPSHOT'
 
 java{
     toolchain{
@@ -18,7 +18,7 @@ java{
 repositories {
 
     // solidity 编译器maven库
-//    maven { url "https://dl.bintray.com/ethereum/maven/" }
+//    maven { url "https://dl.bintray.com/etherls eum/maven/" }
 
     // ipfs repository
     maven { url 'https://jitpack.io' }
