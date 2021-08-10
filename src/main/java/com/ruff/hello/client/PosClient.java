@@ -4,11 +4,9 @@ import com.ruff.hello.contract.StoreKey;
 import com.ruff.hello.contract.TstInV6;
 import com.ruff.hello.contract.TstOutV6;
 import com.ruff.hello.contract.TstPayV6;
+import org.bouncycastle.util.Store;
 import org.fisco.bcos.sdk.BcosSDK;
-import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple4;
-import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple5;
-import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple8;
-import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.Tuple9;
+import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.*;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
 import org.fisco.bcos.sdk.model.TransactionReceipt;
@@ -404,6 +402,23 @@ public class PosClient {
         }catch (Exception e) {
             System.out.printf(" getPubKey exception, error message is {} ", e.getMessage());
             return new byte[0];
+        }
+    }
+    public boolean setPubKey(String contractAddress, byte[]pubKey){
+        try{
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            System.out.println("input pubKey:");
+            System.out.println(Utils.bytesToHexString(pubKey));
+            TransactionReceipt receipt = store.setPubkey(pubKey);
+            System.out.println("getSetPubkeyOutput:");
+            Tuple1<BigInteger> lst = store.getSetPubkeyOutput(receipt);
+            int rtn = Integer.valueOf(lst.getValue1().toString());
+            System.out.println("rtn number: " + rtn);
+            return true;
+        }catch (Exception e) {
+            System.out.printf(" setPubkey exception, error message is {} ", e.getMessage());
+
+            return false;
         }
     }
 

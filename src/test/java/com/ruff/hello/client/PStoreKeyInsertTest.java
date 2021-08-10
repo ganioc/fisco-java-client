@@ -1,5 +1,6 @@
 package com.ruff.hello.client;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class PStoreKeyInsertTest {
@@ -11,6 +12,15 @@ public class PStoreKeyInsertTest {
     @Test
     public void SetPubkey(){
         System.out.println("SetPubkey");
+
+        PosClient posClient = new PosClient(1, privateKey);
+
+        Boolean rtn = posClient.setPubKey(contractAddress,Utils.hexStringToByte("04838b5017079c9b3266c155d0f3350d4a3961f0394ba7f4358047584e72499953661b04ff9f3f4c16a33d8ed37efdf7bbc028a2891724eba9a065d3e2205cc37f") );
+
+        System.out.println(rtn);
+
+        Assertions.assertEquals(true, rtn);
+
     }
 
 }

@@ -18,7 +18,9 @@ public class PStoreKeyTest {
 
         byte[] pubKey = posClient.getPubKey(contractAddress,"0x315411ff94c1663ed0bd3ccd6e902648108bd3cd");
         System.out.println("get public Key by address:");
-        System.out.println(new String(pubKey));
+        String strPubKey = Utils.bytesToHexString(pubKey);
+        System.out.println("len:" + strPubKey.length());
+        System.out.println(strPubKey);
         posClient.stop();
     }
 }
