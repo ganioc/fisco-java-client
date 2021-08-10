@@ -77,16 +77,16 @@ jar {
 
     doLast {
         copy {
-            from configurations.runtime
-            into 'dist/lib'
-        }
-        copy {
-            from file('src/test/resources/')
-            into 'dist/resources'
+            from file('src/main/resources/')
+            into 'dist/'
         }
 
     }
 }
 test {
     useJUnitPlatform()
+}
+
+processResources{
+
 }
