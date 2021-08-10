@@ -1,5 +1,6 @@
 package com.ruff.hello.client;
 
+import com.ruff.hello.contract.StoreKey;
 import com.ruff.hello.contract.TstInV6;
 import com.ruff.hello.contract.TstOutV6;
 import com.ruff.hello.contract.TstPayV6;
@@ -392,6 +393,17 @@ public class PosClient {
             System.out.printf(" getByIdPosIn exception, error message is {} ", e.getMessage());
             PosPayRecord record = new PosPayRecord();
             return record;
+        }
+    }
+
+    public byte[] getPubKey(String contractAddress, String address){
+        try{
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            byte[] pubKey = store.getPubkey(address);
+            return pubKey;
+        }catch (Exception e) {
+            System.out.printf(" getPubKey exception, error message is {} ", e.getMessage());
+            return new byte[0];
         }
     }
 
