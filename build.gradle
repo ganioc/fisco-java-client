@@ -4,10 +4,10 @@ plugins {
 
 }
 application {
-    mainClassName = 'com.ruff.hello.client'
+    mainClassName = 'com.ruff.hello.client.PosCmd'
 }
 group 'org.example'
-version '1.7.1-SNAPSHOT'
+version '1.8.1-SNAPSHOT'
 
 java{
     toolchain{
@@ -63,13 +63,17 @@ jar {
 //    sourceCompatibility = 1.11
 
     manifest {
-        attributes "Main-Class": "com.ruff.hello.client"
+        attributes "Main-Class": "com.ruff.hello.client.PosCmd"
     }
-//    from {
-//        configurations.compile.collect {
-//            it.isDirectory() ? it : zipTree(it)
-//        }
-//    }
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
 
     doLast {
         copy {
@@ -78,7 +82,7 @@ jar {
         }
         copy {
             from file('src/test/resources/')
-            into 'dist/conf'
+            into 'dist/resources'
         }
 
     }
