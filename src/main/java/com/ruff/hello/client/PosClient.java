@@ -406,6 +406,16 @@ public class PosClient {
             return new byte[0];
         }
     }
+    public byte[] getEncrypt(String contractAddress, String address){
+        try{
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            byte[] encrypt = store.getEncrypt(address);
+            return encrypt;
+        }catch (Exception e) {
+            System.out.printf(" getEncrypt exception, error message is {} ", e.getMessage());
+            return new byte[0];
+        }
+    }
     public boolean setPubKey(String contractAddress, byte[]pubKey){
         try{
             StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);

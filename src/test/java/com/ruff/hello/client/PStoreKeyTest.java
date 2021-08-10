@@ -21,6 +21,14 @@ public class PStoreKeyTest {
         String strPubKey = Utils.bytesToHexString(pubKey);
         System.out.println("len:" + strPubKey.length());
         System.out.println(strPubKey);
+
+        byte [] encrypt = posClient.getEncrypt(contractAddress, "0x315411ff94c1663ed0bd3ccd6e902648108bd3cd");
+
+        System.out.println("get encrypt by address:");
+        String strEncrypt = Utils.bytesToHexString(encrypt);
+        System.out.println(strEncrypt);
+
         posClient.stop();
     }
+
 }
