@@ -18,9 +18,10 @@ public class PStoreKeyInsertTest {
         Boolean rtn = posClient.setPubKey(contractAddress,Utils.hexStringToByte("04838b5017079c9b3266c155d0f3350d4a3961f0394ba7f4358047584e72499953661b04ff9f3f4c16a33d8ed37efdf7bbc028a2891724eba9a065d3e2205cc37f") );
 
         System.out.println(rtn);
-
+        posClient.stop();
         Assertions.assertEquals(true, rtn);
 
     }
+
 
 }

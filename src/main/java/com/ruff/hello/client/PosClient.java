@@ -6,6 +6,8 @@ import com.ruff.hello.contract.TstOutV6;
 import com.ruff.hello.contract.TstPayV6;
 import org.bouncycastle.util.Store;
 import org.fisco.bcos.sdk.BcosSDK;
+import org.fisco.bcos.sdk.abi.datatypes.Int;
+import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.Tuple;
 import org.fisco.bcos.sdk.abi.datatypes.generated.tuples.generated.*;
 import org.fisco.bcos.sdk.client.Client;
 import org.fisco.bcos.sdk.crypto.keypair.CryptoKeyPair;
@@ -417,6 +419,21 @@ public class PosClient {
             return true;
         }catch (Exception e) {
             System.out.printf(" setPubkey exception, error message is {} ", e.getMessage());
+
+            return false;
+        }
+    }
+    public boolean setEncrypt(String contractAddress, String address, byte[] encrypt){
+        try{
+            System.out.printf("byte length: %d\n", encrypt.length);
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = store.setEncrypt(address, encrypt);
+            Tuple1<BigInteger> lst = store.getSetEncryptOutput(receipt);
+            int rtn = Integer.valueOf(lst.getValue1().toString());
+            System.out.println("rtn number: "+ rtn);
+            return rtn == 0;
+        }catch (Exception e) {
+            System.out.printf(" setEncrypt exception, error message is {} ", e.getMessage());
 
             return false;
         }
