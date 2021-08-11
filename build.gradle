@@ -54,6 +54,7 @@ dependencies {
     compile ('com.github.ipfs:java-ipfs-http-client:v1.3.3')
 
 //    implementation ('com.github.ipfs:java-ipfs-http-client:v1.3.3')
+    compile ('com.github.pcj:google-options:1.0.0')
 
 }
 jar {
