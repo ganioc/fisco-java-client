@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class POutTest {static String privateKey = "cdc7cc95755f19aa8168e2b0c3dd89d556be87b60608835549c0aee38d156640";
-    static String contractAddress = "0x684bc0b4086207831ab64a4ad0e7e35205259530";
+    static String contractAddress = "0x0bb0d86927b8831a5600c7f224f074754e0519f5";
     //0x239a0bdf1be615e3a0070ac19aed715a5b38eb61";//""0x0e8a2865c26445d3aa32b1d77d99cc01e190858b";
 
     @Test

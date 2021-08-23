@@ -1,9 +1,9 @@
 package com.ruff.hello.client;
 
 import com.ruff.hello.contract.StoreKey;
-import com.ruff.hello.contract.TstInV6;
-import com.ruff.hello.contract.TstOutV6;
-import com.ruff.hello.contract.TstPayV6;
+import com.ruff.hello.contract.TstInV7;
+import com.ruff.hello.contract.TstOutV7;
+import com.ruff.hello.contract.TstPayV7;
 import org.bouncycastle.util.Store;
 import org.fisco.bcos.sdk.BcosSDK;
 import org.fisco.bcos.sdk.abi.datatypes.Int;
@@ -50,7 +50,7 @@ public class PosClient {
     // For PosIn contract
     public DeployRtn deployContractPosIn(String loc) {
         try {
-            TstInV6 pIn = TstInV6.deploy(client, cryptoKeyPair, loc);
+            TstInV7 pIn = TstInV7.deploy(client, cryptoKeyPair, loc);
             //System.out.println("Deploy contract TstIn, contract address is:" + pIn.getContractAddress());
             DeployRtn rtn = new DeployRtn(ErrCode.OK,pIn.getContractAddress());
             return rtn;
@@ -64,7 +64,7 @@ public class PosClient {
 
     public ErrCode InsertPosIn(String contractAddress, String berthId, long inTime, int inTimeType, int inType, String plateId, int prepayLen, int prepayMoney, int vehicleType, String inPicHash) {
         try {
-            TstInV6 pIn = TstInV6.load(contractAddress, client, cryptoKeyPair);
+            TstInV7 pIn = TstInV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.insertRecord(
                     berthId,
                     BigInteger.valueOf(inTime),
@@ -76,7 +76,7 @@ public class PosClient {
                     BigInteger.valueOf(vehicleType),
                     inPicHash
             );
-            List<TstInV6.InsertRecordEventEventResponse> response = pIn.getInsertRecordEventEvents(receipt);
+            List<TstInV7.InsertInRecordEventEventResponse> response = pIn.getInsertInRecordEventEvents(receipt);
             if (!response.isEmpty()) {
                 if (response.get(0).ret.compareTo(new BigInteger("0")) == 0) {
                     System.out.printf(" insert record success from %s \n", response.get(0).account);
@@ -97,7 +97,7 @@ public class PosClient {
 
     public int getIndex(String contractAddress) {
         try {
-            TstInV6 tstIn = TstInV6.load(contractAddress, client, cryptoKeyPair);
+            TstInV7 tstIn = TstInV7.load(contractAddress, client, cryptoKeyPair);
             BigInteger rtn = tstIn.getIndex();
             System.out.printf(" getIndex %s \n", rtn.toString());
             return Integer.valueOf(rtn.toString());
@@ -111,7 +111,7 @@ public class PosClient {
     public PosInRecord getByIdPosIn(String contractAddress, String berthId) {
 
         try {
-            TstInV6 pIn = TstInV6.load(contractAddress, client, cryptoKeyPair);
+            TstInV7 pIn = TstInV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.getById(berthId);
             Tuple9<String, BigInteger, BigInteger, BigInteger, String, BigInteger, BigInteger, BigInteger, String> lst = pIn.getGetByIdOutput(receipt);
 
@@ -138,7 +138,7 @@ public class PosClient {
     }
     public PosInRecord getByIndexPosIn(String contractAddress, int index) {
         try {
-            TstInV6 pIn = TstInV6.load(contractAddress, client, cryptoKeyPair);
+            TstInV7 pIn = TstInV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.getByIndex(BigInteger.valueOf(index));
             Tuple9<String, BigInteger, BigInteger, BigInteger, String, BigInteger, BigInteger, BigInteger, String> lst = pIn.getGetByIdOutput(receipt);
 
@@ -165,7 +165,7 @@ public class PosClient {
     }
     public boolean getRecordPosIn(String contractAddress, int page_offset, int page_size, long start , long end){
         try{
-            TstInV6 pIn = TstInV6.load(contractAddress, client, cryptoKeyPair);
+            TstInV7 pIn = TstInV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.getRecord(BigInteger.valueOf(page_offset),BigInteger.valueOf(page_size), BigInteger.valueOf(start), BigInteger.valueOf(end));
 
             Tuple4<BigInteger, BigInteger, BigInteger, List<String>> lst  = pIn.getGetRecordOutput(receipt);
@@ -188,7 +188,7 @@ public class PosClient {
     }
     public boolean getRecordByPlateIdPosIn(String contractAddress, int page_offset, int page_size, long start , long end, String plate_id){
         try{
-            TstInV6 pIn = TstInV6.load(contractAddress, client, cryptoKeyPair);
+            TstInV7 pIn = TstInV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.getRecordByPlateId(BigInteger.valueOf(page_offset),BigInteger.valueOf(page_size), BigInteger.valueOf(start), BigInteger.valueOf(end), plate_id);
 
             Tuple4<BigInteger, BigInteger, BigInteger, List<String>> lst  = pIn.getGetRecordOutput(receipt);
@@ -215,7 +215,7 @@ public class PosClient {
     // For PosOut contract
     public DeployRtn deployContractPosOut(String loc) {
         try {
-            TstOutV6 pOut = TstOutV6.deploy(client, cryptoKeyPair, loc);
+            TstOutV7 pOut = TstOutV7.deploy(client, cryptoKeyPair, loc);
             // System.out.println("Deploy contract POut, contract address is:" + pOut.getContractAddress());
             return new DeployRtn(ErrCode.OK,pOut.getContractAddress());
         } catch (Exception e) {
@@ -225,7 +225,7 @@ public class PosClient {
 
     public ErrCode InsertPosOut(String contractAddress, String berthId, long outTime, int shouldPayMoney, String id, String outPicHash) {
         try {
-            TstOutV6 pOut = TstOutV6.load(contractAddress, client, cryptoKeyPair);
+            TstOutV7 pOut = TstOutV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pOut.insertRecord(
                     berthId,
                     BigInteger.valueOf(outTime),
@@ -233,7 +233,7 @@ public class PosClient {
                     id,
                     outPicHash
             );
-            List<TstOutV6.InsertRecordEventEventResponse> response = pOut.getInsertRecordEventEvents(receipt);
+            List<TstOutV7.InsertOutRecordEventEventResponse> response = pOut.getInsertOutRecordEventEvents(receipt);
             if (!response.isEmpty()) {
                 if (response.get(0).ret.compareTo(new BigInteger("0")) == 0) {
                     System.out.printf(" insert record success from %s \n", response.get(0).account);
@@ -254,7 +254,7 @@ public class PosClient {
 
     public PosOutRecord getByIdPosOut(String contractAddress, String berthId) {
         try {
-            TstOutV6 pOut = TstOutV6.load(contractAddress, client, cryptoKeyPair);
+            TstOutV7 pOut = TstOutV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pOut.getById(berthId);
             Tuple5<String, BigInteger, BigInteger, String, String> lst = pOut.getGetByIdOutput(receipt);
 
@@ -276,7 +276,7 @@ public class PosClient {
     }
     public PosOutRecord getByIndexPosOut(String contractAddress, int index) {
         try {
-            TstOutV6 pOut = TstOutV6.load(contractAddress, client, cryptoKeyPair);
+            TstOutV7 pOut = TstOutV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pOut.getByIndex(BigInteger.valueOf(index));
             Tuple5<String, BigInteger, BigInteger, String, String> lst = pOut.getGetByIdOutput(receipt);
 
@@ -300,7 +300,7 @@ public class PosClient {
     // For PosPay contract
     public DeployRtn deployContractPosPay(String loc) {
         try {
-            TstPayV6 pPay = TstPayV6.deploy(client, cryptoKeyPair, loc);
+            TstPayV7 pPay = TstPayV7.deploy(client, cryptoKeyPair, loc);
             // System.out.println("Deploy contract PPay, contract address is:" + pPay.getContractAddress());
             return new DeployRtn(ErrCode.OK,pPay.getContractAddress());
         } catch (Exception e) {
@@ -310,7 +310,7 @@ public class PosClient {
 
     public ErrCode InsertPosPay(String contractAddress, String berthId, int amount, int mode, int parkingActualPayMoney, String parkingRecordId, int prepayLen, int shouldPayAmount, int zeroOwe) {
         try {
-            TstPayV6 pIn = TstPayV6.load(contractAddress, client, cryptoKeyPair);
+            TstPayV7 pIn = TstPayV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.insertRecord(
                     berthId,
                     BigInteger.valueOf(amount),
@@ -321,7 +321,7 @@ public class PosClient {
                     BigInteger.valueOf(shouldPayAmount),
                     BigInteger.valueOf(zeroOwe)
             );
-            List<TstPayV6.InsertRecordEventEventResponse> response = pIn.getInsertRecordEventEvents(receipt);
+            List<TstPayV7.InsertPayRecordEventEventResponse> response = pIn.getInsertPayRecordEventEvents(receipt);
             if (!response.isEmpty()) {
                 if (response.get(0).ret.compareTo(new BigInteger("0")) == 0) {
                     System.out.printf(" insert record success from %s \n", response.get(0).account);
@@ -343,7 +343,7 @@ public class PosClient {
     public PosPayRecord getByIdPosPay(String contractAddress, String berthId) {
 
         try {
-            TstPayV6 pIn = TstPayV6.load(contractAddress, client, cryptoKeyPair);
+            TstPayV7 pIn = TstPayV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.getById(berthId);
             Tuple8<String, BigInteger, BigInteger, BigInteger, String, BigInteger, BigInteger, BigInteger> lst = pIn.getGetByIdOutput(receipt);
 
@@ -371,7 +371,7 @@ public class PosClient {
     public PosPayRecord getByIndexPosPay(String contractAddress, int index) {
 
         try {
-            TstPayV6 pIn = TstPayV6.load(contractAddress, client, cryptoKeyPair);
+            TstPayV7 pIn = TstPayV7.load(contractAddress, client, cryptoKeyPair);
             TransactionReceipt receipt = pIn.getByIndex(BigInteger.valueOf(index));
             Tuple8<String, BigInteger, BigInteger, BigInteger, String, BigInteger, BigInteger, BigInteger> lst = pIn.getGetByIdOutput(receipt);
 

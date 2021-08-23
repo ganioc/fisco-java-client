@@ -11,7 +11,7 @@ import com.ruff.hello.client.Utils.ErrCode;
 public class PPayInsertTest {
     static String privateKey =
             "cdc7cc95755f19aa8168e2b0c3dd89d556be87b60608835549c0aee38d156640";
-    static String contractAddress = "0x5493e5f8946dcf4a70197535f905a2bd601df356";
+    static String contractAddress = "0x36f0ce0781bb11995e843469f2d4332b1e155765";
     // "0x3f240bb48160d44949a7dc30f866054799eae621";
     //""0x76c874c230daa3462bac8b44b191dc338e8447b1";
     // "0x3d215cd9553b033b35af84dd38951cc8562908c5";

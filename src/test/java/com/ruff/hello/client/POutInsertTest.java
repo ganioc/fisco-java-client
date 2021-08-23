@@ -11,7 +11,7 @@ import com.ruff.hello.client.Utils.ErrCode;
 public class POutInsertTest {
     static String privateKey =
             "cdc7cc95755f19aa8168e2b0c3dd89d556be87b60608835549c0aee38d156640";
-    static String contractAddress = "0x684bc0b4086207831ab64a4ad0e7e35205259530";
+    static String contractAddress = "0x0bb0d86927b8831a5600c7f224f074754e0519f5";
     //""0xed4ca2376b2e156116087fb036b73f11c7d49227";
     // "0x0e8a2865c26445d3aa32b1d77d99cc01e190858b";
 
