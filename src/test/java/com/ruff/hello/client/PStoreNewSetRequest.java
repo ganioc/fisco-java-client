@@ -7,6 +7,7 @@ public class PStoreNewSetRequest {
     // account2
     static String privateKey = "d96853db1b36acbb796c466cc8971d6545f58a78b43d82eedeb797fc53203d81";
     static String contractAddress = "0xeeaf757f5c7d151992a61c95aba6efcf9a6f9bc7";
+    static String address2 = "0x60079bb72b53e55fd411d93cfa32e7fca0cd28a4";
 
     @Test
     public void setPubkey() {

@@ -41,5 +41,19 @@ public class PStoreNewGetRequest {
         posClient.stop();
         Assertions.assertEquals(true, true,"Should return true");
     }
+    @Test
+    public void queryRequest() {
+        System.out.println("Account2  queryRequest");
+        PosClient posClient = new PosClient(1, privateKey);
+        String strHashId = "00112233445566";
+        byte[] hashId = Utils.hexStringToByte(strHashId);
+        System.out.printf(hashId.toString());
+        boolean rtn = posClient.queryRequest(contractAddress, address, hashId);
+        System.out.println("rtn: " + String.valueOf(rtn) );
+
+        posClient.stop();
+        Assertions.assertEquals(true, true,"Should return true");
+
+    }
 
 }

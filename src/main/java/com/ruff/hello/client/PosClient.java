@@ -469,20 +469,44 @@ public class PosClient {
             return false;
         }
     }
+    public boolean queryRequest(String contractAddress, String address, byte[] hashId){
+        try{
+            System.out.printf("queryRequest, hashId length: %d\n", hashId.length);
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            Tuple4<byte[], byte[], byte[], BigInteger> lst = store.queryRequest(address, hashId);
+
+            byte[] mHashId = lst.getValue1();
+            byte[] mNewHashId = lst.getValue2();
+            byte[] mSecret = lst.getValue3();
+            int rtn = Integer.valueOf(lst.getValue4().toString()) ;
+
+            System.out.printf("hashId: %s\n", Utils.bytesToHexString(mHashId));
+            System.out.printf("newHashId: %s\n", Utils.bytesToHexString(mNewHashId));
+            System.out.printf("secret: %s\n", Utils.bytesToHexString((mSecret)));
+            System.out.printf("status: %s\n", String.valueOf(rtn));
+
+            return rtn == 0;
+        }catch (Exception e) {
+            System.out.println(e);
+            System.out.printf(" setRequest exception, error message is %s \n", e.getMessage());
+
+            return false;
+        }
+    }
     public boolean updateRequest(String contractAddress,String address,  byte[] hashId, byte[] newHashId, byte[] encryptedSecret){
         try{
-            System.out.printf("updateRequest");
+            System.out.printf("updateRequest\n");
             StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
 
             TransactionReceipt receipt = store.updateRequest(address, hashId, newHashId, encryptedSecret);
             Tuple1<BigInteger> lst = store.getUpdateRequestOutput(receipt);
 
             int rtn = Integer.valueOf(lst.getValue1().toString());
-            System.out.printf("rtn number {}\n", rtn);
+            System.out.printf("rtn number %s\n", rtn);
             return rtn == 0;
 
         }catch(Exception e){
-            System.out.printf("updateRequest exception, error message is {}", e.getMessage());
+            System.out.printf("updateRequest exception, error message is %s", e.getMessage());
             return false;
         }
     }
@@ -493,7 +517,7 @@ public class PosClient {
             TransactionReceipt receipt = store.refuseRequest(address, hashId,  BigInteger.valueOf(status));
             Tuple1<BigInteger> lst = store.getRefuseRequestOutput(receipt);
             int rtn = Integer.valueOf(lst.getValue1().toString());
-            System.out.printf("rtn number is {} \n", rtn);
+            System.out.printf("rtn number is %s \n", rtn);
             return rtn == 0;
         }catch(Exception e){
             System.out.printf("refuseRequest exception , error is %s\n", e.getMessage());
