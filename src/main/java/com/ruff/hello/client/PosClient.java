@@ -396,6 +396,12 @@ public class PosClient {
         }
     }
 
+    /**
+     * For StoreKey class
+     * @param contractAddress
+     * @param address
+     * @return
+     */
     public byte[] getPubKey(String contractAddress, String address){
         try{
             StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
@@ -403,16 +409,6 @@ public class PosClient {
             return pubKey;
         }catch (Exception e) {
             System.out.printf(" getPubKey exception, error message is {} ", e.getMessage());
-            return new byte[0];
-        }
-    }
-    public byte[] getEncrypt(String contractAddress, String address){
-        try{
-            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
-            byte[] encrypt = store.getEncrypt(address);
-            return encrypt;
-        }catch (Exception e) {
-            System.out.printf(" getEncrypt exception, error message is {} ", e.getMessage());
             return new byte[0];
         }
     }
@@ -426,29 +422,83 @@ public class PosClient {
             Tuple1<BigInteger> lst = store.getSetPubkeyOutput(receipt);
             int rtn = Integer.valueOf(lst.getValue1().toString());
             System.out.println("rtn number: " + rtn);
-            return true;
-        }catch (Exception e) {
-            System.out.printf(" setPubkey exception, error message is {} ", e.getMessage());
-
-            return false;
-        }
-    }
-    public boolean setEncrypt(String contractAddress, String address, byte[] encrypt){
-        try{
-            System.out.printf("byte length: %d\n", encrypt.length);
-            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
-            TransactionReceipt receipt = store.setEncrypt(address, encrypt);
-            Tuple1<BigInteger> lst = store.getSetEncryptOutput(receipt);
-            int rtn = Integer.valueOf(lst.getValue1().toString());
-            System.out.println("rtn number: "+ rtn);
             return rtn == 0;
         }catch (Exception e) {
-            System.out.printf(" setEncrypt exception, error message is {} ", e.getMessage());
+            System.out.printf(" setPubkey exception, error message is %s ", e.getMessage());
 
             return false;
         }
     }
+    public byte[] getRequest(String contractAddress, byte[] hashId){
+        try{
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            Tuple4<byte[], byte[], byte[], BigInteger> encrypt = store.getRequest(hashId);
 
+            byte[] mHashId = encrypt.getValue1();
+            byte[] mNewHashId = encrypt.getValue2();
+            byte[] mSecret = encrypt.getValue3();
+            int rtn = Integer.valueOf(encrypt.getValue4().toString()) ;
+
+            System.out.printf("hashId: %s\n", Utils.bytesToHexString(mHashId));
+            System.out.printf("newHashId: %s\n", Utils.bytesToHexString(mNewHashId));
+            System.out.printf("secret: %s\n", Utils.bytesToHexString((mSecret)));
+            System.out.printf("status: %s\n", String.valueOf(rtn));
+
+            return  new byte[0];
+        }catch (Exception e) {
+            System.out.printf(" getRequest exception, error message is %s ", e.getMessage());
+            return new byte[0];
+        }
+    }
+    public boolean setRequest(String contractAddress,  byte[] hashId){
+        try{
+            System.out.printf("setRequest, hashId length: %d\n", hashId.length);
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = store.setRequest(hashId);
+//            Tuple1<BigInteger> lst = store.getSetRequestOutput(receipt);
+//
+//            int rtn = Integer.valueOf(lst.getValue1().toString());
+//            System.out.println("rtn number: "+ rtn);
+            int rtn =0;
+            return rtn == 0;
+        }catch (Exception e) {
+            System.out.println(e);
+            System.out.printf(" setRequest exception, error message is %s \n", e.getMessage());
+
+            return false;
+        }
+    }
+    public boolean updateRequest(String contractAddress,String address,  byte[] hashId, byte[] newHashId, byte[] encryptedSecret){
+        try{
+            System.out.printf("updateRequest");
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+
+            TransactionReceipt receipt = store.updateRequest(address, hashId, newHashId, encryptedSecret);
+            Tuple1<BigInteger> lst = store.getUpdateRequestOutput(receipt);
+
+            int rtn = Integer.valueOf(lst.getValue1().toString());
+            System.out.printf("rtn number {}\n", rtn);
+            return rtn == 0;
+
+        }catch(Exception e){
+            System.out.printf("updateRequest exception, error message is {}", e.getMessage());
+            return false;
+        }
+    }
+    public  boolean refuseRequest(String contractAddress,String address, byte[] hashId, int status ){
+        try{
+            System.out.println(("refuseRequest"));
+            StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+            TransactionReceipt receipt = store.refuseRequest(address, hashId,  BigInteger.valueOf(status));
+            Tuple1<BigInteger> lst = store.getRefuseRequestOutput(receipt);
+            int rtn = Integer.valueOf(lst.getValue1().toString());
+            System.out.printf("rtn number is {} \n", rtn);
+            return rtn == 0;
+        }catch(Exception e){
+            System.out.printf("refuseRequest exception , error is %s\n", e.getMessage());
+            return false;
+        }
+    }
     public void stop() {
         client.stop();
         bcosSdk.stopAll();

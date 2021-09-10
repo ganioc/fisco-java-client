@@ -35,9 +35,11 @@ public class PosCmd {
         System.out.printf("operation: %s\n", options.operation);
 
         if(options.cmd.equals("storekey") && options.operation.equals("setencrypt")){
-            CmdStoreKeyInsertEncrypt.SetEncrypt();
+            // CmdStoreKeyInsertEncrypt.SetEncrypt();
+            System.out.printf("storekey setencrypt unavailable");
         }else if(options.cmd.equals("storekey")   && options.operation.equals("getencrypt")){
-            CmdStoreKeyInsertEncrypt.GetEncrypt("0x315411ff94c1663ed0bd3ccd6e902648108bd3cd");
+            // CmdStoreKeyInsertEncrypt.GetEncrypt("0x315411ff94c1663ed0bd3ccd6e902648108bd3cd");
+            System.out.printf("storekey getencrypt unavailable");
         }else{
             System.out.println("Unknown.");
         }

@@ -53,6 +53,13 @@ public class KeyTest {
         long timeNumber = new Date().getTime();
         System.out.println("timeNumber:" + timeNumber);
 
+        String strHash = "11223344";
+        System.out.println(strHash);
+        byte [] hash = Utils.hexStringToByte(strHash);
+        for(int i =0; i< hash.length; i++){
+            System.out.printf("%x\n", hash[i]);
+        }
+
 
         Assertions.assertEquals(1,1);
 
