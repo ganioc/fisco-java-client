@@ -26,7 +26,7 @@ public class PStoreNewSetRequest {
     public void setRequest() {
         System.out.println("Account2  setRequest");
         PosClient posClient = new PosClient(1, privateKey);
-        String strHashId = "0x112233445566";
+        String strHashId = "00112233445566";
         byte[] hashId = Utils.hexStringToByte(strHashId);
         System.out.printf(hashId.toString());
         Boolean rtn = posClient.setRequest(contractAddress, hashId);

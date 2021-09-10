@@ -429,9 +429,10 @@ public class PosClient {
             return false;
         }
     }
-    public byte[] getRequest(String contractAddress, byte[] hashId){
+    public int getRequest(String contractAddress, byte[] hashId){
         try{
             StoreKey store = StoreKey.load(contractAddress, client, cryptoKeyPair);
+
             Tuple4<byte[], byte[], byte[], BigInteger> encrypt = store.getRequest(hashId);
 
             byte[] mHashId = encrypt.getValue1();
@@ -444,10 +445,10 @@ public class PosClient {
             System.out.printf("secret: %s\n", Utils.bytesToHexString((mSecret)));
             System.out.printf("status: %s\n", String.valueOf(rtn));
 
-            return  new byte[0];
+            return  rtn;
         }catch (Exception e) {
             System.out.printf(" getRequest exception, error message is %s ", e.getMessage());
-            return new byte[0];
+            return -1;
         }
     }
     public boolean setRequest(String contractAddress,  byte[] hashId){

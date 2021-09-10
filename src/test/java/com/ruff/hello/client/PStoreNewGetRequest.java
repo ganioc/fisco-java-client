@@ -32,11 +32,11 @@ public class PStoreNewGetRequest {
 
         System.out.println("Account2  request");
         PosClient posClient = new PosClient(1, privateKey);
-        String strHashId = "0x112233445566";
+        String strHashId = "00112233445566";
         byte[] hashId = Utils.hexStringToByte(strHashId);
         System.out.printf(hashId.toString());
-        byte[] rtn = posClient.getRequest(contractAddress, hashId);
-        System.out.println("rtn: " +  rtn);
+        int rtn = posClient.getRequest(contractAddress, hashId);
+        System.out.println("rtn: " + String.valueOf(rtn) );
 
         posClient.stop();
         Assertions.assertEquals(true, true,"Should return true");
